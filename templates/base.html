@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
     <head>
-        <title>{{title}}</title>
+        
         <style>
             .error {
                 color: red;
@@ -9,21 +9,24 @@
         </style>
     </head>
 <body>
-
-    <div>
-        <a href='/logout'>log out</a>
-    </div>
-
-    {% with messages = get_flashed_messages(with_categories=True) %}
-        <ul>
-        {% for category,message in messages %}
-            <li class="{{category}}">{{message}}</li>
-        {% endfor %}
-        </ul>
-    {% endwith %}
-
-    {% block content %}
-    {% endblock %}
-
+    <h1>Signup</h1>
+    <form id="user_input" method="POST">
+        <label for="user_name">User name
+            <input id="user_name" name="user_name" type="text"/>
+            <span class="error">That's not a valid user name</span>
+        </label>
+        <br>
+        <label for="password">Password
+            <input id="password" name="password" type="password"/>
+            <span class="error">That's not a valid password</span>
+        </label>
+        <br>
+        <label for="verify_password">Verify password
+            <input id="verify_password" name="verify_password" type="password"/>
+            <span class="error">Your passwords do not match</span>
+        </label>
+        <br>
+        <input type="submit" name="submit/>
+    </form>
 </body>
 </html>
