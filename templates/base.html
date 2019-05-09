@@ -1,7 +1,6 @@
 <!doctype html>
 <html>
     <head>
-        
         <style>
             .error {
                 color: red;
@@ -11,20 +10,37 @@
 <body>
     <h1>Signup</h1>
     <form id="user_input" method="POST">
-        <label for="user_name">User name
-            <input id="user_name" name="user_name" type="text"/>
-            <span class="error">That's not a valid user name</span>
-        </label>
-        <br>
-        <label for="password">Password
-            <input id="password" name="password" type="password"/>
-            <span class="error">That's not a valid password</span>
-        </label>
-        <br>
-        <label for="verify_password">Verify password
-            <input id="verify_password" name="verify_password" type="password"/>
-            <span class="error">Your passwords do not match</span>
-        </label>
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <label for="user_name">User name</label>
+                    </td>
+                    <td>
+                        <input id="user_name" name="user_name" type="text"/>
+                        <span class="error">That's not a valid user name</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="password">Password</label>
+                    </td>
+                    <td>
+                        <input id="password" name="password" type="password"/>
+                        <span class="error">That's not a valid password</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="verify_password">Verify password</label>
+                    </td>
+                    <td>
+                        <input id="verify_password" name="verify_password" type="password"/>
+                        <span class="error">Your passwords do not match</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
         <br>
         <input type="submit"/>
     </form>
