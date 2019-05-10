@@ -6,11 +6,11 @@ app.config['DEBUG'] = True
 
 #form
 @app.route('/signup')
-def display_user_signup_form():
+def signup():
     return render_template('signup.html')
 
-# validation
-def empty_val(x):
+# validation Booleans
+def empty(x):
     if x:
         return True
  
@@ -18,11 +18,11 @@ def char_length(x):
     if len(x) > 2 and len(x) < 21:
         return True
 
-def email_at_symbol(x):
+def email_symbol(x):
     if x.count('@') >= 1:
         return True
 
-def email_at_symbol_more_than_one(x):
+def email_symbols(x):
     if x.count('@') <= 1:
         return True
 
@@ -30,13 +30,13 @@ def email_period(x):
     if x.count('.') >= 1:
         return True
 
-def email_period_more_than_one(x):
+def email_periods(x):
     if x.count('.') <= 1:
         return True
 
-#process form
+#validate form
 @app.route("/signup", methods=['POST'])
-def user_signup_complete():
+def validate():
 
 #input varibles
     username = request.form['username']
@@ -50,95 +50,60 @@ def user_signup_complete():
     password_verify_error = ""
     email_error = ""
 
-    err_required = "Required"
-    err_reenter_pw = "Verify password"
-    err_char_count = "Must be 3 to 20 characters"
-    err_no_spaces = "Must not contain spaces"
+    error_required = "Required input"
+    error_reenter_pw = "verify password"
+    error_char_count = "must be 3 to 20 characters"
+    error_no_spaces = "must not contain spaces"
 
 #username validation
-    if not empty_val(username):
-        username_error = err_required
-        password = ''
-        password_verify = ''
-        password_error = err_reenter_pw
-        password_verify_error = err_reenter_pw
+    if not empty(username):
+        username_error = error_required
+
     elif not char_length(username):
-        username_error = "Username " + err_char_count
-        password = ''
-        password_verify = ''
-        password_error = err_reenter_pw
-        password_verify_error = err_reenter_pw
+        username_error = "Username " + error_char_count
+
     else:
         if " " in username:
-            username_error = "Username " + err_no_spaces
-            password = ''
-            password_verify = ''
-            password_error = err_reenter_pw
-            password_verify_error = err_reenter_pw
+            username_error = "Username " + error_no_spaces
 
 #password validation
-    if not empty_val(password):
-        password_error = err_required
-        password = ''
-        password_verify = ''
+    if not empty(password):
+        password_error = error_required
+
     elif not char_length(password):
-        password_error = "Password " + err_char_count
-        password = ''
-        password_verify = ''
-        password_verify_error = err_reenter_pw
+        password_error = "Password " + error_char_count
+
     else:
         if " " in password:
-            password_error = "Password " + err_no_spaces
-            password = ''
-            password_verify = ''
-            password_verify_error = err_reenter_pw
+            password_error = "Password " + error_no_spaces
 
 #verify password validation
     if password_verify != password:
         password_verify_error = "Passwords do not match"
         password = ''
         password_verify = ''
-        password_error = 'Passwords must match'
+        password_error = 'Passwords do not match'
 
 #e-mail validation
-    if empty_val(email):
+    if empty(email):
         if not char_length(email):
-            email_error = "Email " + err_char_count
-            password = ''
-            password_verify = ''
-            password_error = err_reenter_pw
-            password_verify_error = err_reenter_pw
-        elif not email_at_symbol(email):
+            email_error = "Email " + error_char_count
+ 
+        elif not email_symbol(email):
             email_error = "Email must contain the @ symbol"
-            password = ''
-            password_verify = ''
-            password_error = err_reenter_pw
-            password_verify_error = err_reenter_pw
-        elif not email_at_symbol_more_than_one(email):
+
+        elif not email_symbols(email):
             email_error = "Email must contain only one @ symbol"
-            password = ''
-            password_verify = ''
-            password_error = err_reenter_pw
-            password_verify_error = err_reenter_pw
+
         elif not email_period(email):
             email_error = "Email must contain a . (dot)"
-            password = ''
-            password_verify = ''
-            password_error = err_reenter_pw
-            password_verify_error = err_reenter_pw
-        elif not email_period_more_than_one(email):
+
+        elif not email_periods(email):
             email_error = "Email must contain only one . (dot)"
-            password = ''
-            password_verify = ''
-            password_error = err_reenter_pw
-            password_verify_error = err_reenter_pw
+
         else:
             if " " in email:
-                email_error = "E-mail " + err_no_spaces
-                password = ''
-                password_verify = ''
-                password_error = err_reenter_pw
-                password_verify_error = err_reenter_pw
+                email_error = "Email " + error_no_spaces
 
 #no error redirects to welcome
 #error will display error message
