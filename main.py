@@ -110,7 +110,7 @@ def validate():
         username = username
         return redirect('/welcome?username={0}'.format(username))
     else:
-        return render_template('/alt_signup', username_error=username_error, username=username, password_error=password_error, password=password, password_verify_error=password_verify_error, password_verify=password_verify, email_error=email_error, email=email)
+        return render_template('/alt_signup.html', username_error=username_error, username=username, password_error=password_error, password=password, password_verify_error=password_verify_error, password_verify=password_verify, email_error=email_error, email=email)
 
 #redirect to welcome
 @app.route('/welcome')
