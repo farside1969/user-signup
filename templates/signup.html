@@ -3,9 +3,9 @@
 {% block content %}    
     
     <h1>Signup</h1>
-        <form method='POST'>
+        <form method='POST' action='/signup'>
             <label><span class="form">Username</span>
-                <input name="username" type="text" value='{{username}}'/>
+                <input name="username" type="username" value='{{username}}'/>
             </label>
                 <p class="error">{{username_error}}</p>
             <label><span class="form">Password</span>
@@ -15,12 +15,13 @@
             <label><span class="form">Password Validate</span>
                 <input name="password_verify" type="password" value='{{password_verify}}'/>
             </label>
-                <p class="error">{{password_validate_error}}</p>
+                <p class="error">{{password_verify_error}}</p>
             <label><span class="form">E-mail (optional)</span>
                 <input name="email" type="text" value='{{email}}'/>
             </label>
                 <p class="error">{{email_error}}</p>
-                <input class="submit" type="submit" value="Submit"/>
+                <input class="submit" type="submit" value="submit"/>
+            
         </form>
 
-{% endblock %} 
+{% endblock %}
