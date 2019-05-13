@@ -55,13 +55,15 @@ def validate():
 #username validation
     if not empty(username):
         username_error = "Username " + error_required
+        username = ""
 
     elif not char_length(username):
         username_error = "Username " + error_char_count
-
+        username = ""
     else:
         if " " in username:
             username_error = "Username " + error_no_spaces
+            username = ""
 
 #password validation
     if not empty(password):
@@ -99,7 +101,9 @@ def validate():
         username = username
         return redirect('/welcome?username={0}'.format(username))
     else:
-        return render_template('/signup.html', username_error=username_error, username=username, password_error=password_error, password=password, password_verify_error=password_verify_error, password_verify=password_verify, email_error=email_error, email=email)
+        return render_template('/signup.html', username_error=username_error, username=username, 
+            password_error=password_error, password=password, password_verify_error=password_verify_error, 
+            password_verify=password_verify, email_error=email_error, email=email)
 
 #redirect to welcome
 @app.route('/welcome')
